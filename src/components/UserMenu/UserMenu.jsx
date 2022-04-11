@@ -12,7 +12,7 @@ const UserMenu = ({name, img}) => {
             <Avatar alt={name} src={img}/>
             <h2 className={styles.title}>{name}</h2>
             </div>
-            <Button color="inherit" variant="contained"><span>Logout</span></Button>
+            <Button color="inherit" variant="contained"><span className={styles.btnText}>Logout</span></Button>
         </div>
     );
 };

@@ -7,7 +7,7 @@ import Navigation from "../Navigation/Navigation";
 const Header = () => {
     return(
         <header className={styles.header}>
-            <Navigation isAuthorization={true}/>
+            <Navigation isAuthorization={false}/>
         </header>
     );
 };
