@@ -5,6 +5,7 @@ import path from '../utils/routePath';
 import HomePage from '../pages/HomePage/HomePage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
 import LoginPage from '../pages/LoginPage/LoginPage';
+import ContactsPage from '../pages/ContactsPage/ContactsPage';
 
 import styles from "./App.module.css";
 
@@ -17,6 +18,7 @@ const App = () => {
             <Route path={path.homePage} element={<HomePage/>}/>
             <Route path={path.registerPage} element={<RegisterPage/>}/>
             <Route path={path.loginPage} element={<LoginPage/>}/>
+            <Route path={path.contactsPage} element={<ContactsPage />}/>
         </Routes>
         </main>
         </>

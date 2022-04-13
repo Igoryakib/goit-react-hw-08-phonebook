@@ -1,0 +1,24 @@
+.input_form {
+    border: 2px solid gray;
+    padding: 5px 20px;
+    transition: 200ms linear;
+    margin-bottom: 13px;
+}
+.input_form:focus {
+    border: 2px solid blue;
+    -webkit-box-shadow: 4px 5px 38px 5px rgba(45, 113, 165, 0.69);
+    -moz-box-shadow: 4px 5px 38px 5px rgba(45, 113, 165, 0.69);
+    box-shadow: 4px 5px 38px 5px rgba(45, 113, 165, 0.69);
+}
+
+.label_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    color: #000;
+    font-size: 17px;
+    font-weight: bold;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
