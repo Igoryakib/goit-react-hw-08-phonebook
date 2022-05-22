@@ -14,6 +14,10 @@ const logoutRequest = createAction(actionTypes.LOGOUT_REQUEST);
 const logoutSuccess = createAction(actionTypes.LOGOUT_SUCCESS);
 const logoutError = createAction(actionTypes.LOGOUT_ERROR);
 
+const getCurrentUserRequest = createAction(actionTypes.CURRENT_USER_REQUEST);
+const getCurrentUserSuccess = createAction(actionTypes.CURRENT_USER_SUCCESS);
+const getCurrentUserError = createAction(actionTypes.CURRENT_USER_ERROR);
+
 export {
   registerRequest,
   registerSuccess,
@@ -24,4 +28,7 @@ export {
   logoutRequest,
   logoutSuccess,
   logoutError,
+  getCurrentUserRequest,
+  getCurrentUserSuccess,
+  getCurrentUserError,
 };
