@@ -1,12 +1,15 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { getAuthorization } from "../../redux/authurization/auth-selectors";
 
 import styles from "./Navigation.module.css";
 
 import UserMenu from "../UserMenu/UserMenu";
 
 const Navigation = ({ isAuthorization }) => {
+  console.log(isAuthorization)
   return (
     <nav className={styles.nav}>
       <ul className={styles.contentNav}>
@@ -60,4 +63,8 @@ Navigation.propTypes = {
   isAuthorization: PropTypes.bool.isRequired,
 };
 
-export default Navigation;
+const mapStateToProps = state => ({
+  isAuthorization: getAuthorization(state)
+});
+
+export default connect(mapStateToProps)(Navigation);

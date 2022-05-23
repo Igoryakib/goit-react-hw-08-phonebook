@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import styles from "./LoginPage.module.css";
+import { connect } from "react-redux";
+import { loginProfile } from "../../redux/authurization/auth-operations";
 
-const LoginPage = () => {
+const LoginPage = ({loginUser}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const onSubmitForm = (event) => {
@@ -12,7 +14,7 @@ const LoginPage = () => {
       email,
       password,
     };
-    console.log(userForm);
+    loginUser(userForm);
     setEmail("");
     setPassword("");
   };
@@ -49,4 +51,8 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+const mapDispatchToProps = dispatch => ({
+  loginUser: (credentials) => dispatch(loginProfile(credentials))
+});
+
+export default connect(null, mapDispatchToProps)(LoginPage);

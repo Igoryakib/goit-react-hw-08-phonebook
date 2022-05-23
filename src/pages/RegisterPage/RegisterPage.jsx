@@ -1,10 +1,12 @@
 import React, {useState} from "react";
+import { connect } from "react-redux";
 import { TextField } from "@mui/material";
 import Button from '@mui/material/Button';
+import { registerProfile } from "../../redux/authurization/auth-operations";
 
 import styles from './RegisterPage.module.css';
 
-const RegisterPage = () => {
+const RegisterPage = ({registerUser}) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -18,7 +20,7 @@ const RegisterPage = () => {
             email,
             password
         }
-        console.log(userForm);
+        registerUser(userForm);
         setName('');
         setEmail('');
         setPassword('');
@@ -35,4 +37,8 @@ const RegisterPage = () => {
     );
 };
 
-export default RegisterPage;
+const mapDispatchToProps = dispatch => ({
+    registerUser: (credentials) => dispatch(registerProfile(credentials)) ,
+});
+
+export default connect(null, mapDispatchToProps)(RegisterPage);

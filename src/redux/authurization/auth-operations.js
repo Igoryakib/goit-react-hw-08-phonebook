@@ -39,7 +39,7 @@ const loginProfile = (credentials) => (dispatch) => {
   dispatch(loginRequest());
   loginUser(credentials)
     .then((data) => {
-      token.setToken(data.token);
+      // token.setToken(data.token);
       dispatch(loginSuccess(data));
     })
     .catch((err) => dispatch(loginError(err)));
@@ -55,3 +55,5 @@ const logoutProfile = () => (dispatch) => {
     })
     .catch((err) => dispatch(logoutError(err)));
 };
+
+export {registerProfile, loginProfile, logoutProfile}
