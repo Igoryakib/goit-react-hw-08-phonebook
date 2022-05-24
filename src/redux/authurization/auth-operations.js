@@ -32,17 +32,17 @@ const registerProfile = (credentials) => (dispatch) => {
       token.setToken(data.token);
       dispatch(registerSuccess(data));
     })
-    .catch((err) => dispatch(registerError(err)));
+    .catch((err) => dispatch(registerError(err.message)));
 };
 
 const loginProfile = (credentials) => (dispatch) => {
   dispatch(loginRequest());
   loginUser(credentials)
     .then((data) => {
-      // token.setToken(data.token);
+      token.setToken(data.token);
       dispatch(loginSuccess(data));
     })
-    .catch((err) => dispatch(loginError(err)));
+    .catch((err) => dispatch(loginError(err.message)));
 };
 
 const logoutProfile = () => (dispatch) => {
@@ -53,7 +53,7 @@ const logoutProfile = () => (dispatch) => {
       token.unSetToken();
       dispatch(logoutSuccess());
     })
-    .catch((err) => dispatch(logoutError(err)));
+    .catch((err) => dispatch(logoutError(err.message)));
 };
 
 export {registerProfile, loginProfile, logoutProfile}

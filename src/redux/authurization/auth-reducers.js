@@ -40,9 +40,9 @@ const isAuthenticated = createReducer(false, {
   });
 
 const error = createReducer('', {
-    [registerError]: (_, action) => action.payload.message,
-    [loginError]: (_, action) => action.payload.message,
-    [logoutError]: (_, action) => action.payload.message
+    [registerError]: (_, action) => action.payload,
+    [loginError]: (_, action) => action.payload,
+    [logoutError]: (_, action) => action.payload
 });
 
 export default combineReducers({

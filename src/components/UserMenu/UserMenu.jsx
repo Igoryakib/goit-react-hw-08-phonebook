@@ -9,7 +9,6 @@ import { logoutProfile } from "../../redux/authurization/auth-operations";
 import styles from './UserMenu.module.css';
 
 const UserMenu = ({name, img, onDelete}) => {
-    console.log(name)
     return(
         <div className={styles.content}>
         <div className={styles.wrapperProfile}>

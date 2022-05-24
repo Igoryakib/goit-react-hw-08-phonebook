@@ -9,7 +9,6 @@ import styles from "./Navigation.module.css";
 import UserMenu from "../UserMenu/UserMenu";
 
 const Navigation = ({ isAuthorization }) => {
-  console.log(isAuthorization)
   return (
     <nav className={styles.nav}>
       <ul className={styles.contentNav}>
