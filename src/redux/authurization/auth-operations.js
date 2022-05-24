@@ -13,7 +13,12 @@ import {
   getCurrentUserError,
 } from "./auth-actions";
 
-import { registerUser, loginUser, logoutUser } from "../../utils/fetchApi";
+import {
+  registerUser,
+  loginUser,
+  logoutUser,
+  getCurrentUser,
+} from "../../utils/fetchApi";
 import axios from "axios";
 
 const token = {
@@ -56,4 +61,22 @@ const logoutProfile = () => (dispatch) => {
     .catch((err) => dispatch(logoutError(err.message)));
 };
 
-export {registerProfile, loginProfile, logoutProfile}
+const getCurrentProfile = () => (dispatch, getState) => {
+  const {
+    auth: { token: persistedToken },
+  } = getState();
+
+  if (!persistedToken) {
+    return;
+  }
+
+  token.setToken(persistedToken);
+
+  dispatch(getCurrentUserRequest());
+
+  getCurrentUser()
+    .then((data) => dispatch(getCurrentUserSuccess(data)))
+    .catch((err) => dispatch(getCurrentUserError(err.message)));
+};
+
+export { registerProfile, loginProfile, logoutProfile, getCurrentProfile };

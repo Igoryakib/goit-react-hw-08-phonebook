@@ -1,5 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { getCurrentProfile } from '../redux/authurization/auth-operations';
+
 import Header from './Header/Header';
 import path from '../utils/routePath';
 import HomePage from '../pages/HomePage/HomePage';
@@ -9,7 +13,11 @@ import ContactsPage from '../pages/ContactsPage/ContactsPage';
 
 import styles from "./App.module.css";
 
-const App = () => {
+const App = ({getCurrentUser}) => {
+    useEffect(() => {
+        getCurrentUser();
+    }, [])
+
     return(
         <>
         <Header/>
@@ -25,6 +33,8 @@ const App = () => {
     );
 };
 
-// coment 
+const mapDispatchToProps = dispatch => ({
+    getCurrentUser: () => dispatch(getCurrentProfile()),
+});
 
-export default App;
+export default connect(null, mapDispatchToProps)(App);

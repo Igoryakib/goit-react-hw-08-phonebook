@@ -14,4 +14,8 @@ const logoutUser = () => {
    return axios.post('users/logout').then(res => res.data).catch(err => console.log(err));
 };
 
-export {registerUser, loginUser, logoutUser};
+const getCurrentUser = () => {
+   return axios.get('/users/current').then(res => res.data).catch(err => console.log(err))
+};
+
+export {registerUser, loginUser, logoutUser, getCurrentUser};
