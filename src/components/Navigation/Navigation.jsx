@@ -21,17 +21,21 @@ const Navigation = ({ isAuthorization }) => {
           >
             <li>Home</li>
           </NavLink>
-          <NavLink
-            className={(navData) =>
-              navData.isActive ? styles.navItem__active : styles.navItem
-            }
-            to={"/contacts"}
-          >
-            <li>Contacts</li>
-          </NavLink>
+          {isAuthorization && (
+            <NavLink
+              className={(navData) =>
+                navData.isActive ? styles.navItem__active : styles.navItem
+              }
+              to={"/contacts"}
+            >
+              <li>Contacts</li>
+            </NavLink>
+          )}
         </ul>
         {isAuthorization ? (
-          <UserMenu name="Ihor" img="https://wallpapercave.com/wp/wp3284755.jpg"/>
+          <UserMenu
+            img="https://wallpapercave.com/wp/wp3284755.jpg"
+          />
         ) : (
           <ul className={styles.wrapperAuth}>
             <NavLink
@@ -62,8 +66,8 @@ Navigation.propTypes = {
   isAuthorization: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = state => ({
-  isAuthorization: getAuthorization(state)
+const mapStateToProps = (state) => ({
+  isAuthorization: getAuthorization(state),
 });
 
 export default connect(mapStateToProps)(Navigation);
