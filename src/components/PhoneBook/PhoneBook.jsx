@@ -1,47 +1,61 @@
-import React, {useState} from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-// import {addContact} from '../../redux/action-operations';
-// import {getFilteredContacts, getLoading } from '../../redux/selectors';
+import {addContact} from '../../redux/contacts/contacts-operations';
+import {getFilteredContacts, getLoading } from '../../redux/contacts/contacts-selectors';
 
-import styles from "./Phonebook.module.css";
-import ListContacts from "../ListContacts/ListConatcts";
+import styles from "./PhoneBook.module.css";
+import ListContacts from "../ListContacts/ListContacts";
 import Filter from "../Filter/Filter";
 
-const  PhoneBook = () => {
-//   state = {
-//     name: "",
-//     number: "",
-//     filter: "",
-//   };
+class PhoneBook extends Component {
+  state = {
+    name: "",
+    number: "",
+    filter: "",
+  };
 
-const [name, setName] = useState('');
-const [number, setNumber] = useState('');
-const [filter, setFilter] = useState('');
+  static propTypes = {
+    btnText: PropTypes.string,
+  };
 
- const  verifyData = () => {
-    name.toLocaleLowerCase();
+  verifyData = () => {
+    this.state.name.toLocaleLowerCase();
     this.props.contacts.map((item) => {
       item.name.toLocaleLowerCase();
       if (item.name === this.state.name || item.number === this.state.number) {
         alert(`${this.state.name} is already in contacts`);
-        return setName('') && setNumber('');
+        return this.setState({
+          name: "",
+          number: "",
+        });
       }
     });
   };
 
- const addContact = (event) => {
-    event.preventDefault();
-    const contact = {
-      name,
-      number,
-    };
-    addContact(contact);
-    setName('');
-    setNumber('');
+  handleOnChange = (event) => {
+    this.setState({
+      [event.currentTarget.name]: event.currentTarget.value,
+    });
+    this.verifyData();
   };
 
-  
+  addContact = (event) => {
+    event.preventDefault();
+    const contact = {
+      name: this.state.name,
+      number: this.state.number,
+    };
+    this.props.addContact(contact);
+    this.setState({
+      name: "",
+      number: "",
+    });
+  };
+
+  render() {
+    const { btnText } = this.props;
+    const { name, contacts, number, filter } = this.state;
     const { input_form, form_add_contact, label_form, submit_btn, title_list } =
       styles;
 
@@ -52,7 +66,7 @@ const [filter, setFilter] = useState('');
 
     return (
       <>
-        <form className={form_add_contact} onSubmit={addContact}>
+        <form className={form_add_contact} onSubmit={this.addContact}>
           <label className={label_form}>
             Name
             <input
@@ -62,7 +76,7 @@ const [filter, setFilter] = useState('');
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
               title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
               required
-              onChange={(event)=> setName(event.target.value)}
+              onChange={this.handleOnChange}
               value={name}
             />
           </label>
@@ -71,7 +85,7 @@ const [filter, setFilter] = useState('');
             <input
               className={input_form}
               value={number}
-              onChange={(event)=> setNumber(event.target.value)}
+              onChange={this.handleOnChange}
               type="tel"
               name="number"
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -80,36 +94,28 @@ const [filter, setFilter] = useState('');
             />
           </label>
           <button className={submit_btn} type="submit">
-          Add contact
+            add contact
           </button>
         </form>
         <h2 className={title_list}>Contacts</h2>
         <div>
           <Filter/>
-          <ListContacts 
+          {this.props.isLoading ? <h1>Loading ...</h1> :           <ListContacts
             btnText="Delete"
-          />
-          {/* {this.props.isLoading ? <h1>Loading ...</h1> :           <ListContacts 
-            btnText="Delete"
-          />} */}
+          />}
         </div>
       </>
     );
   }
+}
 
-PhoneBook.propTypes = {
-    btnText: PropTypes.string,
-  };
+const mapDispatchToProps = (dispatch) => ({
+    addContact: (contactObj) => (dispatch(addContact(contactObj))),
+});
 
-export default PhoneBook;
+const mapStateToProps = (state) => ({
+  contacts: getFilteredContacts(state),
+  isLoading: getLoading(state),
+});
 
-// const mapDispatchToProps = (dispatch) => ({
-//     addContact: (contactObj) => (dispatch(addContact(contactObj))),
-// });
-
-// const mapStateToProps = (state) => ({
-//   contacts: getFilteredContacts(state),
-//   isLoading: getLoading(state),
-// });
-
-// export default connect(mapStateToProps, mapDispatchToProps)(PhoneBook);
+export default connect(mapStateToProps, mapDispatchToProps)(PhoneBook);

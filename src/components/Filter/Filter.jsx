@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-// import {
-//   filterContacts
-// } from "../../redux/actions";
-// import {getFilterContacts } from '../../redux/selectors';
+import {
+  filterContacts
+} from "../../redux/contacts/contacts-actions";
+import {getFilterContacts } from '../../redux/contacts/contacts-selectors';
 
 import styles from "./Filter.module.css";
 
@@ -30,14 +30,12 @@ const Filter = ({ value, filterContacts}) => {
   );
 };
 
-export default Filter;
+const mapStateToProps = (state) => ({
+  value: getFilterContacts(state)
+});
 
-// const mapStateToProps = (state) => ({
-//   value: getFilterContacts(state)
-// });
+const mapDispatchToProps = (dispatch) => ({
+  filterContacts: (filterText) => {dispatch(filterContacts(filterText))},
+});
 
-// const mapDispatchToProps = (dispatch) => ({
-//   filterContacts: (filterText) => {dispatch(filterContacts(filterText))},
-// });
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+export default connect(mapStateToProps, mapDispatchToProps)(Filter);

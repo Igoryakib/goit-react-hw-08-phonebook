@@ -15,7 +15,19 @@ const logoutUser = () => {
 };
 
 const getCurrentUser = () => {
-   return axios.get('/users/current').then(res => res.data).catch(err => console.log(err))
+   return axios.get('/users/current').then(res => res.data).catch(err => console.log(err));
 };
 
-export {registerUser, loginUser, logoutUser, getCurrentUser};
+const getContacts = () => {
+   return axios.get('/contacts').then(res => res.data).catch(err => console.log(err));
+};
+
+const createContact = (credentials) => {
+   return axios.post('/contacts', credentials).then(res => res.data).catch(err => console.log(err));
+};
+
+const deleteContact = (contactId) => {
+   return axios.delete(`/contacts/${contactId}`).then(res => res.data).catch(err => console.log(err));
+};
+
+export {registerUser, loginUser, logoutUser, getCurrentUser, getContacts, createContact, deleteContact};

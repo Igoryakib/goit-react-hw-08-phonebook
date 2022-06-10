@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styles from './ContactsPage.module.css';
-import PhoneBook from "../../components/Form/Phonebook";
+import PhoneBook from "../../components/PhoneBook/PhoneBook";
 
 const ContactsPage = () => {
   const {title_section, phoneBook_section} = styles;

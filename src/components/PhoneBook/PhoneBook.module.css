@@ -58,7 +58,7 @@
     font-weight: normal;
     font-family: Arial, Helvetica, sans-serif;
 }
-.submit_btn :hover {
+.submit_btn:hover {
     border: 2px solid blue;
     -webkit-box-shadow: 4px 5px 38px 5px rgba(56, 59, 62, 0.29);
     -moz-box-shadow: 4px 5px 38px 5px rgba(56, 59, 62, 0.29);
