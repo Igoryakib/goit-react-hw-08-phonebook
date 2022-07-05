@@ -5,8 +5,10 @@ import Button from '@mui/material/Button';
 import { registerProfile } from "../../redux/authurization/auth-operations";
 
 import styles from './RegisterPage.module.css';
+import { getError } from "../../redux/authurization/auth-selectors";
+import HomePageStyles from '../HomePage/HomePage.module.css';
 
-const RegisterPage = ({registerUser}) => {
+const RegisterPage = ({registerUser, error}) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -33,6 +35,7 @@ const RegisterPage = ({registerUser}) => {
         <TextField margin="normal" value={password} onChange={(event) => setPassword(event.target.value)} fullWidth id="password" label="password" variant="outlined" type='password'/>
         <Button type="submit" color="inherit" variant="contained"><span className={styles.btnText}>Register</span></Button>
         </form>
+        {error && <h2 className={HomePageStyles.subtitle}>Oops something went wrong :(, please try again</h2>}
         </section>
     );
 };
@@ -41,4 +44,8 @@ const mapDispatchToProps = dispatch => ({
     registerUser: (credentials) => dispatch(registerProfile(credentials)) ,
 });
 
-export default connect(null, mapDispatchToProps)(RegisterPage);
+const mapStateToProps = state => ({
+    error: getError(state),
+  });
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterPage);

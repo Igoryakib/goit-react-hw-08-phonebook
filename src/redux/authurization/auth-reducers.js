@@ -44,7 +44,11 @@ const error = createReducer('', {
     [registerError]: (_, action) => action.payload,
     [loginError]: (_, action) => action.payload,
     [logoutError]: (_, action) => action.payload,
-    [getCurrentUserError]: (_, action) => action.payload
+    [getCurrentUserError]: (_, action) => action.payload,
+    [registerSuccess]: () => '',
+    [loginSuccess]: () => '',
+    [getCurrentUserSuccess]: () => '',
+    [logoutSuccess]: () => '',
 });
 
 export default combineReducers({

@@ -4,8 +4,11 @@ import Button from "@mui/material/Button";
 import styles from "./LoginPage.module.css";
 import { connect } from "react-redux";
 import { loginProfile } from "../../redux/authurization/auth-operations";
+import { getError } from "../../redux/authurization/auth-selectors";
+import HomePageStyles from '../HomePage/HomePage.module.css';
 
-const LoginPage = ({loginUser}) => {
+
+const LoginPage = ({loginUser, error}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const onSubmitForm = (event) => {
@@ -20,7 +23,7 @@ const LoginPage = ({loginUser}) => {
   };
   return (
     <section>
-      <section className={styles.loginPage}>
+      <div className={styles.loginPage}>
         <form onSubmit={onSubmitForm} className={styles.formLogin}>
           <TextField
             margin="normal"
@@ -43,10 +46,11 @@ const LoginPage = ({loginUser}) => {
             type="password"
           />
           <Button type="submit" color="inherit" variant="contained">
-            <span className={styles.btnText}>Register</span>
+            <span className={styles.btnText}>Login</span>
           </Button>
         </form>
-      </section>
+      </div>
+      {error && <h2 className={HomePageStyles.subtitle}>Invalid password or email :(, please try again</h2>}
     </section>
   );
 };
@@ -55,4 +59,8 @@ const mapDispatchToProps = dispatch => ({
   loginUser: (credentials) => dispatch(loginProfile(credentials))
 });
 
-export default connect(null, mapDispatchToProps)(LoginPage);
+const mapStateToProps = state => ({
+  error: getError(state),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

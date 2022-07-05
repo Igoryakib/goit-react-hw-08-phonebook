@@ -10,6 +10,7 @@ import HomePage from "../pages/HomePage/HomePage";
 import RegisterPage from "../pages/RegisterPage/RegisterPage";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import ContactsPage from "../pages/ContactsPage/ContactsPage";
+import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 
 import PrivateRoute from "../utils/PrivateRoute";
 import PublicRoute from "../utils/PublicRoute";
@@ -51,6 +52,7 @@ const App = ({ getCurrentUser }) => {
               </PrivateRoute>
             }
           />
+          <Route path="*" element={<NotFoundPage/>}/>
         </Routes>
       </main>
     </>
